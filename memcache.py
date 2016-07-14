@@ -148,6 +148,7 @@ class Client(threading.local):
     _FLAG_INTEGER = 1 << 1
     _FLAG_LONG = 1 << 2
     _FLAG_COMPRESSED = 1 << 3
+    _FLAG_COMPATIABLE_JAVA = 1 << 5
 
     _SERVER_RETRIES = 10  # how many times to try finding a free server.
 
@@ -972,6 +973,7 @@ class Client(threading.local):
             pass
         elif isinstance(val, six.text_type):
             val = val.encode('utf-8')
+            flags |= Client._FLAG_COMPATIABLE_JAVA
         elif isinstance(val, int):
             flags |= Client._FLAG_INTEGER
             val = '%d' % val
